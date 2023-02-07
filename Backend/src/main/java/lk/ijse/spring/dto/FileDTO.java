@@ -15,6 +15,6 @@ import lombok.ToString;
 @Data
 @ToString
 public class FileDTO {
-    String filePath;
     String file;
+    String filePath;
 }
