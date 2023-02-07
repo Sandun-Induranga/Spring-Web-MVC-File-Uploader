@@ -9,8 +9,8 @@ $("button").on("click", function () {
         data: data,
         contentType: false,
         processData: false,
-        success: function () {
-            alert("Done");
+        success: function (res) {
+            $('#image').attr('src', `data:image/png;base64,${res}`);
         }
     })
 

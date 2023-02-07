@@ -13,6 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 /**
@@ -26,7 +27,7 @@ import java.util.List;
 public class FileController {
 
     @PostMapping
-    public List<Byte> uploadFile(@RequestParam("file") MultipartFile file, ModelMap modelMap) {
+    public String uploadFile(@RequestParam("file") MultipartFile file, ModelMap modelMap) {
         modelMap.addAttribute("file", file);
         try {
 
@@ -35,12 +36,11 @@ public class FileController {
             Files.write(location, byteArray);
             file.transferTo(location);
 
-            byte[] img = Files.readAllBytes(location);
-            List<Byte> byteStream = new ArrayList<>();
-            for (byte b : img) {
-                byteStream.add(b);
-            }
-            return byteStream;
+            //            List<Byte> byteStream = new ArrayList<>();
+//            for (byte b : img) {
+//                byteStream.add(b);
+//            }
+            return Base64.getEncoder().encodeToString(byteArray);
 
         } catch (IOException e) {
             throw new RuntimeException(e);
