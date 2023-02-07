@@ -4,7 +4,8 @@ $("button").on("click", function () {
     $.ajax({
         url:"http://localhost:8080/uploader/upload",
         method:"post",
-        data:$("input:first-child").val(),
+        enctype:"multipart/form-data",
+        data:$("#file-form").serialize(),
         success:function () {
             alert("Done");
         }

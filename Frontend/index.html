@@ -15,14 +15,16 @@
         <aside class="border-white border-1 border w-50 h-50">
 
         </aside>
-        
-        <aside class="d-flex justify-content-center">
-            <input type="file" class="col-2">
-            <input type="text" class="col-6">
-        </aside>
+
+        <form id="file-form">
+            <aside class="d-flex justify-content-center">
+                <input type="file" class="col-2">
+                <input type="text" class="col-6">
+            </aside>
+        </form>
 
         <aside>
-            <button class="btn btn-primary">Upload</button>
+            <button type="button" form="file-form" class="btn btn-primary">Upload</button>
         </aside>
 
     </section>
