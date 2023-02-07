@@ -12,6 +12,8 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author : Sandun Induranga
@@ -24,7 +26,7 @@ import java.nio.file.Paths;
 public class FileController {
 
     @PostMapping
-    public void uploadFile(@RequestParam("file") MultipartFile file, ModelMap modelMap){
+    public List<Byte> uploadFile(@RequestParam("file") MultipartFile file, ModelMap modelMap) {
         modelMap.addAttribute("file", file);
         try {
 
@@ -32,6 +34,13 @@ public class FileController {
             Path location = Paths.get("/media/sandu/0559F5C021740317/GDSE/Project_Zone/IdeaProjects/Spring-Web-MVC-File-Uploader/Backend/src/main/java/lk/ijse/spring/assets/image.jpeg");
             Files.write(location, byteArray);
             file.transferTo(location);
+
+            byte[] img = Files.readAllBytes(location);
+            List<Byte> byteStream = new ArrayList<>();
+            for (byte b : img) {
+                byteStream.add(b);
+            }
+            return byteStream;
 
         } catch (IOException e) {
             throw new RuntimeException(e);
