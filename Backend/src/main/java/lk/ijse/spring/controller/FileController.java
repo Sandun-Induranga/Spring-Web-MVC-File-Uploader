@@ -1,6 +1,7 @@
 package lk.ijse.spring.controller;
 
 import org.springframework.http.MediaType;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,14 +19,9 @@ import java.net.URISyntaxException;
 @CrossOrigin
 public class FileController {
 
-    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public void uploadFile(@RequestPart("myFile") MultipartFile myFile){
-        try {
-            String currentLocation = new File(this.getClass().getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile().getParentFile().getAbsolutePath();
-            System.out.println(currentLocation);
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
-        }
+    @PostMapping
+    public void uploadFile(@RequestParam("file") MultipartFile file, ModelMap modelMap){
+        modelMap.addAttribute("file", file);
     }
 
 }
