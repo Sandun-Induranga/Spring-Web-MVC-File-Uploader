@@ -19,7 +19,7 @@ import java.net.URISyntaxException;
 public class FileController {
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public void uploadFile(@RequestPart("file") MultipartFile file){
+    public void uploadFile(@RequestPart("myFile") MultipartFile myFile){
         try {
             String currentLocation = new File(this.getClass().getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile().getParentFile().getAbsolutePath();
             System.out.println(currentLocation);
