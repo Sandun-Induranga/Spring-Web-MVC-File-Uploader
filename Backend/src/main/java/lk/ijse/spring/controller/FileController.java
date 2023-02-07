@@ -7,7 +7,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.annotation.MultipartConfig;
 import java.io.File;
+import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * @author : Sandun Induranga
@@ -22,6 +26,16 @@ public class FileController {
     @PostMapping
     public void uploadFile(@RequestParam("file") MultipartFile file, ModelMap modelMap){
         modelMap.addAttribute("file", file);
+        try {
+
+            byte[] byteArray = file.getBytes();
+            Path location = Paths.get("/media/sandu/0559F5C021740317/GDSE/Project_Zone/IdeaProjects/Spring-Web-MVC-File-Uploader/Backend/src/main/java/lk/ijse/spring/assets/image.jpeg");
+            Files.write(location, byteArray);
+            file.transferTo(location);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
