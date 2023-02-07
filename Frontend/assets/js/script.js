@@ -6,12 +6,12 @@ $("button").on("click", function () {
     data.append("file", file, filePath);
 
     $.ajax({
-        url:"http://localhost:8080/uploader/upload",
-        method:"post",
-        enctype:"multipart/form-data",
-        data:$("#file-form").serialize(),
-        contentType:"application/json",
-        success:function () {
+        url: "http://localhost:8080/uploader/upload",
+        method: "post",
+        data: data,
+        contentType: false,
+        processData: false,
+        success: function () {
             alert("Done");
         }
     })

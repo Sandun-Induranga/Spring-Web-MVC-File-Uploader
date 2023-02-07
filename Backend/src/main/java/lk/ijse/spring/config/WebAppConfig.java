@@ -1,9 +1,14 @@
 package lk.ijse.spring.config;
 
+import lk.ijse.spring.advicer.AppWideExceptionHandler;
 import lk.ijse.spring.controller.FileController;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * @author : Sandun Induranga
@@ -12,6 +17,12 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackageClasses = {FileController.class})
-public class WebAppConfig {
+@ComponentScan(basePackageClasses = {FileController.class, AppWideExceptionHandler.class})
+public class WebAppConfig implements WebMvcConfigurer {
+
+    @Bean
+    public MultipartResolver multipartResolver() {
+        return new StandardServletMultipartResolver();
+    }
+
 }
