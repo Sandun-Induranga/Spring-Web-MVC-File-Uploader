@@ -1,9 +1,7 @@
 package lk.ijse.spring.controller;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author : Sandun Induranga
@@ -16,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class FileController {
 
     @PostMapping
-    public void uploadFile(){
+    public void uploadFile(@ModelAttribute ModelMap modelMap){
         System.out.println("Invoked");
     }
 
