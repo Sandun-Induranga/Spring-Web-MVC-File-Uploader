@@ -1,5 +1,6 @@
 package lk.ijse.spring.controller;
 
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,4 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/upload")
 public class FileController {
+
+    @PostMapping
+    public void uploadFile(){
+        System.out.println("Invoked");
+    }
+
 }
