@@ -32,14 +32,9 @@ public class FileController {
         try {
 
             byte[] byteArray = file.getBytes();
-            Path location = Paths.get("/media/sandu/0559F5C021740317/GDSE/Project_Zone/IdeaProjects/Spring-Web-MVC-File-Uploader/Backend/src/main/java/lk/ijse/spring/assets/image.jpeg");
-            Files.write(location, byteArray);
-            file.transferTo(location);
-
-            //            List<Byte> byteStream = new ArrayList<>();
-//            for (byte b : img) {
-//                byteStream.add(b);
-//            }
+//            Path location = Paths.get("/media/sandu/0559F5C021740317/GDSE/Project_Zone/IdeaProjects/Spring-Web-MVC-File-Uploader/Backend/src/main/java/lk/ijse/spring/assets/image.jpeg");
+//            Files.write(location, byteArray);
+//            file.transferTo(location);
             return Base64.getEncoder().encodeToString(byteArray);
 
         } catch (IOException e) {
