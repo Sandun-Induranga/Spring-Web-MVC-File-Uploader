@@ -23,8 +23,8 @@ import javax.persistence.Id;
 public class Image {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Integer id;
     String fileString;
     String fileName;
 

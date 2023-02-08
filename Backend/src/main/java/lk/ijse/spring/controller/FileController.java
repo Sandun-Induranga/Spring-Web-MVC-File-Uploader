@@ -1,23 +1,20 @@
 package lk.ijse.spring.controller;
 
+import lk.ijse.spring.entity.Image;
 import lk.ijse.spring.repo.FileRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.stereotype.Service;
+
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.annotation.MultipartConfig;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Base64;
-import java.util.List;
 
 /**
  * @author : Sandun Induranga
@@ -29,8 +26,8 @@ import java.util.List;
 @CrossOrigin
 public class FileController {
 
-//    @Autowired
-//    FileRepo fileRepo;
+    @Autowired
+    FileRepo fileRepo;
 
     @PostMapping
     public String uploadFile(@RequestParam("file") MultipartFile file, ModelMap modelMap) {
@@ -38,12 +35,22 @@ public class FileController {
         try {
 
             byte[] byteArray = file.getBytes();
-//            Path location = Paths.get("/media/sandu/0559F5C021740317/GDSE/Project_Zone/IdeaProjects/Spring-Web-MVC-File-Uploader/Backend/src/main/java/lk/ijse/spring/assets/image.jpeg");
-//            Files.write(location, byteArray);
-//            file.transferTo(location);
+            String projectPath = new File(this.getClass().getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile().getParentFile().getAbsolutePath();
+
+            long imageCount = fileRepo.count()+1;
+
+            Path location = Paths.get(projectPath + "/image" + imageCount + ".jpeg");
+            Files.write(location, byteArray);
+            file.transferTo(location);
+            System.out.println(projectPath);
+
+            fileRepo.save(new Image(null, location.toString(),"New Image"));
+
             return Base64.getEncoder().encodeToString(byteArray);
 
         } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
     }
