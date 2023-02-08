@@ -37,14 +37,14 @@ public class FileController {
             byte[] byteArray = file.getBytes();
             String projectPath = new File(this.getClass().getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile().getParentFile().getAbsolutePath();
 
-            long imageCount = fileRepo.count()+1;
+            long imageCount = fileRepo.count() + 1;
 
             Path location = Paths.get(projectPath + "/image" + imageCount + ".jpeg");
             Files.write(location, byteArray);
             file.transferTo(location);
             System.out.println(projectPath);
 
-            fileRepo.save(new Image(null, location.toString(),"New Image"));
+            fileRepo.save(new Image(null, location.toString(), "New Image"));
 
             return Base64.getEncoder().encodeToString(byteArray);
 
